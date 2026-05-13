@@ -1,24 +1,42 @@
 # dotclaude
 
-**Stop the screenshot shuffle.** Win+Shift+S, type `/snip what's wrong here?`, done. No saving the PNG. No hunting it down in Explorer. No dragging files into the terminal. Just the question you actually wanted to ask, with the screenshot already attached.
+**Take a screenshot. Type your question. That's it.**
+
+`/snip` lets you show Claude something on your screen — without saving the picture, finding it later, or dragging files around.
 
 Custom commands, skills, and prompts for [Claude Code](https://claude.com/claude-code) — with a `codex/` folder for [Codex CLI](https://github.com/openai/codex) ports as I write them.
 
 Built by [@contactkvijay](https://github.com/contactkvijay). MIT licensed — fork, copy, remix.
 
-## The friction `/snip` kills
+## The problem
 
-You spot a bug. Win+Shift+S, drag a box around it. The screenshot is on your clipboard.
+You see something on your screen — a bug, an error message, a weird-looking design — and you want Claude to look at it.
 
-Then the detour starts. Save the PNG — where? Desktop? Downloads? That `bug-reports/` folder you keep meaning to clean up? Name it. Open Explorer. Find it. Tab back to the terminal where Claude Code is running. Drag the file in so its path lands in your prompt. *Now* type the question you came here to ask.
+Without `/snip`, here's what you have to do every time:
 
-By the time you're done, your train of thought has left the station. Half the time you skip the screenshot entirely and try to describe the bug in words. The other half, you spend longer babysitting the file than reading the answer.
+1. Press **Win+Shift+S** and drag a box around what you want to show.
+2. Click "Save" on the little notification that pops up (or paste it into Paint first).
+3. Pick a folder. Pick a filename. Save it.
+4. Open File Explorer. Hunt for the file you just saved.
+5. Switch back to the window where Claude is running.
+6. Drag the file into the chat box.
+7. *Now* finally type your question.
 
-`/snip` collapses it. The screenshot is already on the clipboard — that's enough. Type `/snip <your question>` and Claude saves the PNG for you (timestamped, in `%TEMP%`, no decisions required) and answers your question using the image as context. One step. No context switch. Your flow keeps moving.
+Seven steps. By step five you've already forgotten what you wanted to ask. So most of the time you just skip the screenshot, try to describe the problem in words, and hope Claude can guess what you're looking at.
+
+## How `/snip` fixes it
+
+Same thing, with `/snip`:
+
+1. Press **Win+Shift+S** and drag a box around what you want to show.
+2. In Claude, type `/snip what's wrong here?` (or whatever you want to ask).
+3. Claude saves the picture for you and answers your question.
+
+Three steps. You never open File Explorer. You never pick a folder. You never name a file. The picture goes into a temp folder with a name like `snip-20260513-093200-742.png` — you don't have to remember where it is, and you don't have to clean it up.
 
 ## Demo
 
-Win+Shift+S → `/snip describe this error` → Claude sees the screenshot inline and answers — no detour through your file system:
+Win+Shift+S → `/snip describe this error` → Claude reads the picture and answers:
 
 ![/snip demo](./snip-command.gif)
 
