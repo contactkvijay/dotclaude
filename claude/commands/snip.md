@@ -1,16 +1,20 @@
 ---
-description: Save the current Windows clipboard image to a temp PNG and view it
-argument-hint: [optional-label]
+description: Save the current Windows clipboard screenshot to a temp PNG and respond to the user about it
+argument-hint: [your question or context about the screenshot]
 allowed-tools: PowerShell, Read
 ---
 
-Save the current Windows clipboard image to `$env:TEMP\claude-snips\` and view it. Windows-only — uses `System.Windows.Forms.Clipboard.GetImage()` to read the clipboard image, which is what Snipping Tool (Win+Shift+S) writes.
+The user just took a screenshot with Win+Shift+S — it's on the Windows clipboard, not yet saved to disk. They want you to (a) save it so you can see it, and (b) answer whatever they wrote after `/snip` using the screenshot as visual context.
 
-The user typed: `/snip $ARGUMENTS`
+The user's request:
+
+`$ARGUMENTS`
+
+Treat the text above as their actual question / instruction. The screenshot is the visual input that goes with it. If `$ARGUMENTS` is empty, just describe what's in the screenshot so they know it loaded.
 
 Steps:
 
-1. Run this PowerShell snippet exactly as written. It writes the clipboard image to a timestamped PNG under `$env:TEMP\claude-snips\` and prints the absolute path to stdout. If the clipboard has no image, it exits non-zero with an error message.
+1. Run this PowerShell snippet exactly as written. It writes the clipboard image to a timestamped PNG under `$env:TEMP\claude-snips\` and prints the absolute path to stdout. The filename is just a timestamp — the user's description is NOT encoded into it. If the clipboard has no image, the snippet exits non-zero with an error message.
 
 ```powershell
 Add-Type -AssemblyName System.Windows.Forms
@@ -22,13 +26,8 @@ if ($null -eq $img) {
 }
 $dir = Join-Path $env:TEMP 'claude-snips'
 New-Item -ItemType Directory -Force -Path $dir | Out-Null
-$raw = @'
-$ARGUMENTS
-'@
-$label = ($raw.Trim() -replace '[^A-Za-z0-9_-]', '-').Trim('-')
-if (-not $label) { $label = 'snip' }
-$stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-$path = Join-Path $dir "$label-$stamp.png"
+$stamp = Get-Date -Format 'yyyyMMdd-HHmmss-fff'
+$path = Join-Path $dir "snip-$stamp.png"
 $img.Save($path, [System.Drawing.Imaging.ImageFormat]::Png)
 $img.Dispose()
 Write-Output $path
@@ -36,6 +35,6 @@ Write-Output $path
 
 2. If the snippet succeeded, use the Read tool on the absolute path it printed. The PNG will load as an image you can see.
 
-3. In one sentence, acknowledge the filename and describe what's in the screenshot so the user knows it loaded correctly.
+3. Now respond to the user's request (the `$ARGUMENTS` text shown above), using the screenshot as your visual context. Do not just describe the image — actually answer their question or do what they asked. If they passed no arguments, then a one-sentence description of what's in the screenshot is the right response.
 
 4. If the snippet failed (no image on clipboard, or any other error), tell the user verbatim: "No image found on the clipboard. Take a screenshot with Win+Shift+S, then re-run /snip." Do not retry the snippet — wait for the user.
