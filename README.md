@@ -4,6 +4,12 @@ Custom commands, skills, and prompts for [Claude Code](https://claude.com/claude
 
 Built by [@contactkvijay](https://github.com/contactkvijay). MIT licensed — fork, copy, remix.
 
+## Demo
+
+`/snip` in action — Win+Shift+S → `/snip describe this error` → Claude sees the screenshot inline:
+
+<video src="https://github.com/contactkvijay/dotclaude/raw/main/snip-command.mp4" controls muted playsinline width="720"></video>
+
 ## What's in here
 
 | Command | What it does | Status |
