@@ -4,6 +4,8 @@
 
 The fastest way to ask Claude about anything you can see.
 
+> **Windows only.** On macOS, Claude Code already accepts pasted screenshots (Cmd+V) — you don't need this.
+
 You're staring at a weird error. A broken layout. A chart that doesn't add up. You *could* try to put it into words. Or you could just show.
 
 `/snip` makes showing as easy as asking.
