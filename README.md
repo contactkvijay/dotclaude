@@ -1,12 +1,24 @@
 # dotclaude
 
+**Stop the screenshot shuffle.** Win+Shift+S, type `/snip what's wrong here?`, done. No saving the PNG. No hunting it down in Explorer. No dragging files into the terminal. Just the question you actually wanted to ask, with the screenshot already attached.
+
 Custom commands, skills, and prompts for [Claude Code](https://claude.com/claude-code) — with a `codex/` folder for [Codex CLI](https://github.com/openai/codex) ports as I write them.
 
 Built by [@contactkvijay](https://github.com/contactkvijay). MIT licensed — fork, copy, remix.
 
+## The friction `/snip` kills
+
+You spot a bug. Win+Shift+S, drag a box around it. The screenshot is on your clipboard.
+
+Then the detour starts. Save the PNG — where? Desktop? Downloads? That `bug-reports/` folder you keep meaning to clean up? Name it. Open Explorer. Find it. Tab back to the terminal where Claude Code is running. Drag the file in so its path lands in your prompt. *Now* type the question you came here to ask.
+
+By the time you're done, your train of thought has left the station. Half the time you skip the screenshot entirely and try to describe the bug in words. The other half, you spend longer babysitting the file than reading the answer.
+
+`/snip` collapses it. The screenshot is already on the clipboard — that's enough. Type `/snip <your question>` and Claude saves the PNG for you (timestamped, in `%TEMP%`, no decisions required) and answers your question using the image as context. One step. No context switch. Your flow keeps moving.
+
 ## Demo
 
-`/snip` in action — Win+Shift+S → `/snip describe this error` → Claude sees the screenshot inline:
+Win+Shift+S → `/snip describe this error` → Claude sees the screenshot inline and answers — no detour through your file system:
 
 ![/snip demo](./snip-command.gif)
 
