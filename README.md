@@ -8,7 +8,7 @@ Built by [@contactkvijay](https://github.com/contactkvijay). MIT licensed — fo
 
 `/snip` in action — Win+Shift+S → `/snip describe this error` → Claude sees the screenshot inline:
 
-<video src="https://github.com/contactkvijay/dotclaude/raw/main/snip-command.mp4" controls muted playsinline width="720"></video>
+![/snip demo](./snip-command.gif)
 
 ## What's in here
 
